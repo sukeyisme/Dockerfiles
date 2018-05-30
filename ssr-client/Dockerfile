@@ -6,6 +6,7 @@ ENV PASSWORD    2333
 ENV METHOD      aes-128-ctr
 ENV PROTOCOL    auth_aes128_md5
 ENV OBFS        tls1.2_ticket_auth
+ENV LOCAL_ADDR  127.0.0.1
 ENV LOCAL_PORT  8992
 
 RUN apk add --no-cache --update python libsodium
@@ -21,4 +22,4 @@ CMD python local.py -s "$SERVER_ADDR" \
 -o "$OBFS" \
 -O "$PROTOCOL" \
 -l "$LOCAL_PORT" \
--b 0.0.0.0
+-b "LOCAL_ADDR"
