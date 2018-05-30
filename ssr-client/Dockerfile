@@ -22,4 +22,4 @@ CMD python local.py -s "$SERVER_ADDR" \
 -o "$OBFS" \
 -O "$PROTOCOL" \
 -l "$LOCAL_PORT" \
--b "LOCAL_ADDR"
+-b "$LOCAL_ADDR"
