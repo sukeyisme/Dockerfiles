@@ -6,4 +6,4 @@ RUN chmod 777 /usr/bin/build.sh
 RUN build.sh
 
 COPY exec.sh /usr/sbin/
-ENTRYPOINT ["/usr/sbin/exec.sh"]
+ENTRYPOINT ["/usr/sbin/zerotier-one"]
