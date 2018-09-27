@@ -1,14 +1,15 @@
 ## -*- docker-image-name: "frp-client" -*-
-FROM alpine:latest
+FROM busybox
 
-ENV VERSION 0.19.1
-ENV FRP_PACKAGE frp_${VERSION}_linux_amd64
+ENV FRP_VERSION 0.21.0
+RUN wget https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_amd64.tar.gz \
+    && tar -xf frp_${FRP_VERSION}_linux_amd64.tar.gz \
+    && mkdir /frpc \
+    && cp frp_${FRP_VERSION}_linux_amd64/frpc* /frpc/ \
+    && rm -rf frp_${FRP_VERSION}_linux_amd64*
 
-COPY $FRP_PACKAGE/frpc /
-COPY $FRP_PACKAGE/frpc.ini /
+RUN mkdir /conf
+VOLUME /conf
 
-WORKDIR /
-CMD ["/frpc" ,"-c", "frpc.ini"]
-
-#下载并解压
-# RUN wget https://github.com/fatedier/frp/releases/download/v${VERSION}/$FRP_PACKAGE && tar -xzf $FRP_PACKAGE && rm $FRP_PACKAGE
+WORKDIR /frpc
+ENTRYPOINT ["./frpc","-c","/conf/frpc.ini"]
