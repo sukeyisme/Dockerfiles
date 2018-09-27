@@ -1,5 +1,8 @@
-from alpine:edge
+FROM centos:7
+LABEL Version="1.2.12"
 
-RUN apk add --no-cache --update zerotier-one --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+COPY build.sh /usr/bin/
+RUN build.sh
 
-CMD ["/usr/sbin/zerotier-one"]
+COPY exec.sh /usr/sbin/
+ENTRYPOINT ["/usr/sbin/exec.sh"]
