@@ -1,4 +1,4 @@
-FROM sukeyisme/zerotier-one
+FROM sukeyisme/zerotier-one:1.2.12
 
 RUN ln -sf /usr/sbin/zerotier-one /zerotier-idtool
 COPY startup.sh /startup.sh
