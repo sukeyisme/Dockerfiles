@@ -4,7 +4,7 @@ set user 22264820:003
 set pwd 123456
 
 
-spawn pgyvpn
+spawn PgyVistor
 expect "Please Enter Your Account:"
 send "$user\r"
 expect "Please Enter Your Password:"
