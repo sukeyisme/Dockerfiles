@@ -1,7 +1,7 @@
 #!/usr/bin/expect
 
-set user 22264820:003
-set pwd 123456
+set user [lindex $argv 0]
+set pwd [lindex $argv 1]
 
 
 spawn PgyVistor
