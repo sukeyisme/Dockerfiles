@@ -1,8 +1,9 @@
 FROM lsiobase/alpine
 
-ENV VERSION 3.5.6
-RUN wget https://github.com/liuzhuoling2011/baidupcs-web/releases/download/${VERSION}/BaiduPCS-Go-${VERSION}-linux-64 \
-&& mv BaiduPCS-Go-${VERSION}-linux-64 baidupcs \
+ENV VERSION 3.5.7
+RUN wget http://qiniu.zoranjojo.top/BaiduPCS-Go-${VERSION}-linux-amd64.zip \
+&& unzip BaiduPCS-Go-${VERSION}-linux-amd64.zip \
+&& mv BaiduPCS-Go-${VERSION}-linux-amd64/BaiduPCS-Go baidupcs \
 && chmod a+x baidupcs
 
 ENTRYPOINT ["./baidupcs"]
