@@ -11,7 +11,15 @@ RUN wget https://codeload.github.com/ntop/n2n/tar.gz/2.4 \
 && tar -xf 2.4 \
 && cd n2n-2.4 && make && make install
 
+RUN yum install -y cmake
+
+RUN wget https://codeload.github.com/meyerd/n2n/zip/master \
+&& unzip master \
+&& cd n2n-master/n2n_v2 && cmake . && make
+
 FROM centos:7
 COPY --from=build-env /usr/sbin/supernode /usr/sbin/
 COPY --from=build-env /usr/sbin/edge /usr/sbin/
+COPY --from=build-env /root/n2n-master/n2n_v2/supernode /usr/sbin/supernodev2s
+COPY --from=build-env /root/n2n-master/n2n_v2/edge /usr/sbin/edgev2s
 RUN yum install net-tools -y
