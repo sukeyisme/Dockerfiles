@@ -8,4 +8,4 @@ FROM lsiobase/alpine:3.8
 COPY --from=build-env /root/go/bin/BaiduPCS-Go /usr/sbin/
 RUN apk add --no-cache tmux
 ENV LANG C.UTF-8
-CMD tmux new -d -s baidu BaiduPCS-Go & top
+CMD tmux new -d -s baidu BaiduPCS-Go d --stream --locate -p 16 downloads/ & top
