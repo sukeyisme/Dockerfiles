@@ -9,13 +9,13 @@ ENV OBFS        tls1.2_ticket_auth
 ENV LOCAL_ADDR  127.0.0.1
 ENV LOCAL_PORT  8992
 
-RUN apk add --no-cache --update python libsodium
+RUN apk add --no-cache --update python libsodium privoxy
 
 ADD shadowsocksr/shadowsocks /shadowsocks
 
 WORKDIR /shadowsocks
-
-CMD python local.py -s "$SERVER_ADDR" \
+CMD privoxy /etc/privoxy/config && \
+python local.py -s "$SERVER_ADDR" \
 -p "$SERVER_PORT" \
 -k "$PASSWORD" \
 -m "$METHOD" \
