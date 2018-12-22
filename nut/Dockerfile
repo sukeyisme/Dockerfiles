@@ -12,6 +12,8 @@ RUN wget https://codeload.github.com/blawar/nut/zip/master \
 && unzip master \
 && rm master
 
+RUN apk add --no-cache libjpeg-turbo
+
 WORKDIR /root/nut-master
 
 ENTRYPOINT ["python", "nut.py"]
