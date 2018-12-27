@@ -7,14 +7,8 @@ RUN pip install --install-option="--prefix=/install" colorama pyopenssl requests
 
 FROM  python:alpine
 COPY --from=build-env /install /usr/local
-WORKDIR /root
-RUN wget https://codeload.github.com/blawar/nut/zip/master \
-&& unzip master \
-&& rm master
 
 RUN apk add --no-cache libjpeg-turbo
-
-WORKDIR /root/nut-master
 
 ENTRYPOINT ["python", "nut.py"]
 
