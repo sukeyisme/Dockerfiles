@@ -33,5 +33,5 @@ RUN cd /etc/yum.repos.d/ \
 && rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
 && yum erase zeromq3\
 && yum clean all\
-&& yum update\
-&& yum install pfring-dkms n2disk nprobe ntopng cento n2n
+&& yum update -y\
+&& yum install pfring-dkms n2disk nprobe ntopng cento n2n -y
