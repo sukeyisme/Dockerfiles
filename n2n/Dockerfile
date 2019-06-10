@@ -12,7 +12,7 @@ WORKDIR /root
 # && cd n2n-2.4 && make && make install
 
 RUN wget https://codeload.github.com/ntop/n2n/zip/dev \
-&& unzip n2n-dev \
+&& unzip dev \
 && cd n2n-dev && make && make install
 
 RUN yum install -y cmake
