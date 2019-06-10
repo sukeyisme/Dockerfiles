@@ -7,9 +7,13 @@ yum install openssl-devel net-tools -y
 RUN yum install wget -y
 WORKDIR /root
 
-RUN wget https://codeload.github.com/ntop/n2n/tar.gz/2.4 \
-&& tar -xf 2.4 \
-&& cd n2n-2.4 && make && make install
+# RUN wget https://codeload.github.com/ntop/n2n/tar.gz/2.4 \
+# && tar -xf 2.4 \
+# && cd n2n-2.4 && make && make install
+
+RUN wget https://codeload.github.com/ntop/n2n/zip/dev \
+&& unzip n2n-dev \
+&& cd n2n-dev && make && make install
 
 RUN yum install -y cmake
 
