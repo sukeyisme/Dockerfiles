@@ -26,11 +26,12 @@ FROM centos:7
 # COPY --from=build-env /usr/sbin/edge /usr/sbin/
 # COPY --from=build-env /root/n2n-master/n2n_v2/supernode /usr/sbin/supernodev2s
 # COPY --from=build-env /root/n2n-master/n2n_v2/edge /usr/sbin/edgev2s
-# RUN yum install net-tools -y
+RUN yum install net-tools -y
+RUN yum install wget -y
 RUN cd /etc/yum.repos.d/ \
 && wget http://packages.ntop.org/centos/ntop.repo -O ntop.repo \
 && rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
 && yum erase zeromq3\
 && yum clean all\
 && yum update\
-yum install pfring-dkms n2disk nprobe ntopng cento n2n
+&& yum install pfring-dkms n2disk nprobe ntopng cento n2n
