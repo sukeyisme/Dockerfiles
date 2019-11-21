@@ -29,7 +29,7 @@ FROM centos:7
 RUN yum install net-tools -y
 RUN yum install wget -y
 RUN cd /etc/yum.repos.d/ \
-&& wget http://packages.ntop.org/centos/ntop.repo -O ntop.repo \
+&& wget http://packages.ntop.org/centos-stable/ntop.repo -O ntop.repo \
 && rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
 && yum erase zeromq3\
 && yum clean all\
