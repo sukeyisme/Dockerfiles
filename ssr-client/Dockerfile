@@ -8,6 +8,9 @@ ENV PROTOCOL    auth_aes128_md5
 ENV OBFS        tls1.2_ticket_auth
 ENV LOCAL_ADDR  127.0.0.1
 ENV LOCAL_PORT  8992
+ENV PROTOCOL_PARAM ""
+ENV OBFS_PARAM ""
+
 
 RUN apk add --no-cache --update python libsodium privoxy
 
@@ -22,4 +25,6 @@ python local.py -s "$SERVER_ADDR" \
 -o "$OBFS" \
 -O "$PROTOCOL" \
 -l "$LOCAL_PORT" \
--b "$LOCAL_ADDR"
+-b "$LOCAL_ADDR" \
+-G "$PROTOCOL_PARAM" \
+-g "$OBFS_PARAM"
