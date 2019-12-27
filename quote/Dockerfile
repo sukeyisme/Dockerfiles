@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:7 as build
 
 RUN yum -y install make automake gcc gcc-c++ tar unzip bzip2 wget tcl tk gettext gperf ant cppunit-devel libcurl-devel expat-devel openssl-devel bzip2-devel libcap-devel lz4-devel snappy-devel epel-release openssh-clients\
 && yum -y update nss \
@@ -138,3 +138,11 @@ LD_LIBRARY_PATH=/usr/local/lib make && make install
 RUN cd /tmp/tbb-2019_U3 && cp -rp include/* /usr/local/include/ && rm -f /usr/local/include/index.html
 RUN cd /tmp/tbb-2019_U3/build/linux_intel64_gcc_cc5.4.0_libc2.17_kernel4.9.125_release && \
  cp -p libtbb* /usr/lib && ldconfig 
+
+RUN rm -rf /tmp \
+&& yum clean all \
+&& rm -rf /usr/local/src/* \
+&& rm -rf /var/cache/yum
+
+# FROM centos:7
+# COPY --from=build 

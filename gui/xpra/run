@@ -1,0 +1,30 @@
+#!/bin/sh
+
+
+	Xorg\
+	  +extension RANDR\
+	  +extension RENDER\
+	  -config /etc/xpra/xorg.conf\
+	  -dpi $XORG_DPI\
+	  -logfile /tmp/Xorg.log\
+	  -nolisten tcp\
+	  -noreset\
+	  -xinerama &
+
+su xpra -c "\
+TMPDIR=/tmp/xpra-mmap xpra start $DISPLAY\
+  --tcp-auth=env\
+  --bind-tcp=0.0.0.0:10000\
+  --html=on\
+  --compress=0\
+  --dpi="${XPRA_DPI}"\
+  --keyboard-sync=yes\
+  --mmap=yes\
+  --no-daemon\
+  --mdns=no\
+  --pulseaudio=no\
+  --readonly=no\
+  --sharing=no\
+  --speaker=no\
+  --start="xhost +"\
+  --webcam=no"
