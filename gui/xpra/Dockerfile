@@ -53,9 +53,26 @@ RUN chown "${UID}":"${GID}" "/run/xpra"
 
 RUN apk add --no-cache xhost
 
+
+
+VOLUME /tmp/.X11-unix
+
+RUN echo "http://nl.alpinelinux.org/alpine/edge/testing" \
+  >> /etc/apk/repositories
+RUN apk add --no-cache py3-inotify
+
+RUN apk add --no-cache su-exec bash
+
+ENV SHELL="/bin/bash"
+
+ADD tcp_m /usr/local/bin/
+RUN chmod 777 /usr/local/bin/tcp_m
+
+
+
 ADD run /usr/local/bin/
 RUN chmod 777 /usr/local/bin/run
 
 ENTRYPOINT [ "/usr/local/bin/run" ]
 
-# CMD [ "xterm" ]
+CMD [ "xhost +" ]
