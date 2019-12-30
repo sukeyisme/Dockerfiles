@@ -65,14 +65,32 @@ RUN apk add --no-cache su-exec bash
 
 ENV SHELL="/bin/bash"
 
+RUN apk add  --no-cache wine freetype
+RUN apk add --no-cache libx11 
+RUN apk add --no-cache ncurses
+RUN mkdir -p /usr/share/wine/mono /usr/share/wine/gecko \
+  && wget https://dl.winehq.org/wine/wine-mono/4.7.5/wine-mono-4.7.5.msi \
+  -O /usr/share/wine/mono/wine-mono-4.7.5.msi 
+
+ENV HOME=/home/${UNAME}
+
+# USER ${UNAME}
+# WORKDIR ${HOME}
+
+
+
+# RUN /usr/local/bin/run 
+ADD idman636build1.exe  /
+
+RUN wget https://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86.msi \
+  -O /usr/share/wine/gecko/wine_gecko-2.47-x86.msi \
+  && wget https://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86_64.msi \
+  -O /usr/share/wine/gecko/wine_gecko-2.47-x86_64.msi
+
 ADD tcp_m /usr/local/bin/
 RUN chmod 777 /usr/local/bin/tcp_m
-
-
-
 ADD run /usr/local/bin/
 RUN chmod 777 /usr/local/bin/run
-
 ENTRYPOINT [ "/usr/local/bin/run" ]
 
 CMD [ "xhost +" ]

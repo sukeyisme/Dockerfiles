@@ -7,7 +7,6 @@ TMPDIR=/tmp/spacemacs-mmap xpra start $DISPLAY\
   --html=on\
   --keyboard-sync=yes\
   --mmap=yes\
-  --no-daemon\
   --printing=no\
   --pulseaudio=no\
   --readonly=no\

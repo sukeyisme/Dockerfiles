@@ -13,5 +13,9 @@ chmod 1777 /tmp/.X11-unix
 	  -xinerama &
 
 su-exec "${UNAME}" bash tcp_m "$@"
+su-exec "${UNAME}" sleep 30
+su-exec "${UNAME}" wine idman636build1.exe /skipdlgs
+su-exec "${UNAME}" sleep 30
+su-exec "${UNAME}" wine /home/xpra/.wine/drive_c/Program\ Files/Internet\ Download\ Manager/IDMan.exe
 
 
