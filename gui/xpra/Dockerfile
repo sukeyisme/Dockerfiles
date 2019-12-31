@@ -2,10 +2,8 @@ FROM i386/alpine:edge
 
 RUN apk --no-cache upgrade\
   && apk --no-cache add \
-  xpra \
-  py3-paramiko
-
-
+  xpra
+# py3-paramiko
 
 ENV DISPLAY=":14"
 ENV XORG_DPI="96"  
@@ -18,8 +16,6 @@ ENV GNAME="xpra"
 
 EXPOSE $XPRA_TCP_PORT
 
-# RUN apk add --no-cache xterm
-
 RUN addgroup -g ${GID} ${GNAME}
 RUN adduser -D -g '' -u ${UID} -G ${GNAME} ${UNAME}
 
@@ -31,21 +27,21 @@ RUN chown "${UID}":"${GID}" "${XDG_RUNTIME_DIR}" "/run/user/${UID}/"
 
 # USER ${UNAME}
 # WORKDIR /home/${UNAME}
-RUN apk add --no-cache dbus-x11 py-dbus
-RUN apk add --no-cache 	xf86-video-vesa
-RUN apk add --no-cache xf86-video-fbdev
-RUN apk add --no-cache libinput kbd pekwm
-RUN apk add --no-cache mesa-dri-swrast mesa-dri-vmwgfx
-RUN apk add --no-cache xf86-input-keyboard xf86-input-mouse
+# RUN apk add --no-cache dbus-x11 py-dbus
+# RUN apk add --no-cache 	xf86-video-vesa
+# RUN apk add --no-cache xf86-video-fbdev
+# RUN apk add --no-cache libinput kbd pekwm
+# RUN apk add --no-cache mesa-dri-swrast mesa-dri-vmwgfx
+# RUN apk add --no-cache xf86-input-keyboard xf86-input-mouse
 
-RUN dbus-uuidgen > /var/lib/dbus/machine-id
+# RUN dbus-uuidgen > /var/lib/dbus/machine-id
 
 #https://gitlab.alpinelinux.org/alpine/aports/issues/8741
 #https://stackoverflow.com/questions/3657860/bash-append-text-to-last-line-of-file
 RUN sed -i '${s/$/ -config \/etc\/xpra\/xorg.conf/}' /etc/xpra/conf.d/55_server_x11.conf
 
-RUN apk add --no-cache py3-cairo
-RUN apk add --no-cache xterm xpra-webclient
+# RUN apk add --no-cache py3-cairo
+RUN apk add --no-cache xpra-webclient
 
 
 RUN mkdir -p "/run/xpra"

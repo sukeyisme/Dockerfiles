@@ -1,5 +1,4 @@
-# FROM i386/alpine:edge as build
-FROM xpra as build
+FROM sukeyisme/xpra-wine
 
 RUN apk add  --no-cache wine freetype
 
