@@ -1,5 +1,5 @@
-#!/bin/bash
-TMPDIR=/tmp/spacemacs-mmap xpra start $DISPLAY\
+#!/bin/sh
+TMPDIR=/tmp/xpra-mmap xpra start $DISPLAY\
   --tcp-auth=env\
   --bind-tcp=0.0.0.0:10000\
   --compress=0\
@@ -10,7 +10,8 @@ TMPDIR=/tmp/spacemacs-mmap xpra start $DISPLAY\
   --printing=no\
   --pulseaudio=no\
   --readonly=no\
+  --daemon=${XPRA_DAEMON}\
   --sharing=no\
   --speaker=no\
-  --start-child="$@"\
-  --webcam=no
+  --webcam=no \
+  --start="$@"

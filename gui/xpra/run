@@ -1,16 +1,16 @@
 #!/bin/bash
 
-chmod 1777 /tmp/.X11-unix
+# chmod 1777 /tmp/.X11-unix
 
-	Xorg\
-	  +extension RANDR\
-	  +extension RENDER\
-	  -config /etc/xpra/xorg.conf\
-	  -dpi $XORG_DPI\
-	  -logfile /tmp/Xorg.log\
-	  -nolisten tcp\
-	  -noreset\
-	  -xinerama &
+# 	Xorg\
+# 	  +extension RANDR\
+# 	  +extension RENDER\
+# 	  -config /etc/xpra/xorg.conf\
+# 	  -dpi $XORG_DPI\
+# 	  -logfile /tmp/Xorg.log\
+# 	  -nolisten tcp\
+# 	  -noreset\
+# 	  -xinerama &
 
 su-exec "${UNAME}" bash tcp_m "$@"
 su-exec "${UNAME}" sleep 30
