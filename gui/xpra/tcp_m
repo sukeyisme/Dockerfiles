@@ -14,4 +14,5 @@ TMPDIR=/tmp/xpra-mmap xpra start $DISPLAY\
   --sharing=no\
   --speaker=no\
   --webcam=no \
+  --xvfb="Xvfb -dpi 96 -noreset -nolisten tcp +extension GLX +extension RANDR +extension RENDER +extension Composite -screen 0 1600x900x24+32" \
   --start="$@"
