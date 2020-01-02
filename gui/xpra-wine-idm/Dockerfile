@@ -36,8 +36,12 @@ ENV XPRA_DAEMON="no"
 USER root
 RUN apk add --no-cache dbus py3-paramiko
 RUN dbus-uuidgen > /var/lib/dbus/machine-id
-RUN apk add --no-cache xterm
+RUN ln -sf "${HOME}/.wine/drive_c/users/${UNAME}/Downloads" /mnt
+RUN ln -sf "${HOME}/.wine/drive_c/users/${UNAME}/Application Data/IDM" /mnt
+RUN ln -sf "${HOME}/.wine/drive_c/users/${UNAME}/Application Data/DMCache" /mnt
 USER ${UNAME}
 ENV XPRA_WIN32_MAX_SIZE_HINT=1
+# WORKDIR /home/xpra/.wine/drive_c/Program Files/Internet Download Manager
+# CMD [ "wine IDMan.exe"]
 CMD [ "wine start /max \"C:\\Program Files\\Internet Download Manager\\IDMan.exe\""]
-# CMD [ "wine "/home/xpra/.wine/drive_c/Program\ Files/Internet\ Download\ Manager/IDMan.exe"]
+# CMD [ "wine explorer \/desktop=test,1024x768 \"/home/xpra/.wine/drive_c/Program\ Files/Internet\ Download\ Manager/IDMan.exe\""]

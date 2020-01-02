@@ -36,9 +36,14 @@ RUN chown "${UID}":"${GID}" "${XDG_RUNTIME_DIR}" "/run/user/${UID}/"
 # RUN apk add --no-cache xf86-input-keyboard xf86-input-mouse
 
 
+#may be try debian
 #https://gitlab.alpinelinux.org/alpine/aports/issues/8741
+#https://github.com/mviereck/x11docker/issues/117
 #https://stackoverflow.com/questions/3657860/bash-append-text-to-last-line-of-file
-RUN sed -i '${s/$/ -config \/etc\/xpra\/xorg.conf/}' /etc/xpra/conf.d/55_server_x11.conf
+# RUN sed -i '${s/$/ -config \/etc\/xpra\/xorg.conf/}' /etc/xpra/conf.d/55_server_x11.conf
+RUN sed -i 's/xpra_Xdummy/xpra_Xdummy\ -dpi 96\ -ac/' /etc/xpra/conf.d/55_server_x11.conf
+RUN sed -i.bak 's#\(config \).*buildozer.*xorg\.conf#\1/etc/xpra/xorg.conf#g' /etc/xpra/conf.d/55_server_x11.conf \
+  && rm /etc/xpra/conf.d/55_server_x11.conf.bak
 
 # RUN apk add --no-cache py3-cairo
 
@@ -84,10 +89,17 @@ RUN chmod 777 /usr/local/bin/tcp_m
 ENV HOME=/home/${UNAME}
 ENV XPRA_DAEMON="no"
 
+RUN apk add --no-cache xterm
+
 USER ${UNAME}
 WORKDIR ${HOME}
 # ADD run /usr/local/bin/
 # RUN chmod 777 /usr/local/bin/run
+RUN echo "test"
+RUN cat /etc/xpra/conf.d/55_server_x11.conf 
+
+ENV XPRA_DEFAULT_VFB_RESOLUTION=1600x900
 
 ENTRYPOINT [ "/usr/local/bin/tcp_m" ]
-CMD [ "xhost +" ]
+# CMD [ "xhost +" ]
+CMD [ "xterm" ]
