@@ -1,6 +1,6 @@
 # Dockerfiles
 
-## n2n usage
+## n2n
 n2n has three version: ntop-stable,ntop-nightly,meyerd-v2s.
 ### ntop-stable
 ```shell
@@ -21,4 +21,20 @@ docker run -d --privileged --net=host --name edge-stable sukeyisme/n2n:meyerd-v2
 ## ssr-client
 ```shell
 docker run -d --net=host -e SERVER_ADDR=<server_addr> -e SERVER_PORT=<remoteport> -e PASSWORD=<password> -e METHOD=<method> -e PROTOCOL=<protocol> -e PROTOCOL_PARAM=<protocol_param> -e OBFS=<obfs> -e OBFS_PARAM=<obfs_param> -e LOCAL_PORT=<localport> -e LOCAL_ADDR=<localaddress> --name ssr-client sukeyisme/ssr-client
+```
+
+## gui
+### xpra
+```shell
+docker run -d --name xpra -p host_port:container_port -e XPRA_PASSWORD= sukeyisme/xpra
+```
+
+### xpra-wine
+```shell
+docker run -d --name xpra-wine -p host_port:container_port  -e XPRA_PASSWORD= sukeyisme/xpra-wine
+```
+
+### xpra-wine-idm
+```shell
+docker run -d --name xpra-wine-idm -p host_port:container_port  -e XPRA_PASSWORD= -v host_folder:/mnt/Downloads -v host_forder:/mnt/IDM -v host_forder:/mnt/DMCache sukeyisme/xpra-wine-idm
 ```
