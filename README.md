@@ -20,7 +20,7 @@ docker run -d --privileged --net=host --name edge-stable sukeyisme/n2n:meyerd-v2
 
 ## ssr-client
 ```shell
-docker run -d --net=host -e SERVER_ADDR=<server_addr> -e SERVER_PORT=<remoteport> -e PASSWORD=<password> -e METHOD=<method> -e PROTOCOL=<protocol> -e PROTOCOL_PARAM=<protocol_param> -e OBFS=<obfs> -e OBFS_PARAM=<obfs_param> -e LOCAL_PORT=<localport> -e LOCAL_ADDR=<localaddress> --name ssr-client sukeyisme/ssr-client
+docker run -d --net=host -e SERVER_ADDR=<server_addr> -e SERVER_PORT=<remoteport> -e PASSWORD=<password> -e METHOD=<method> -e PROTOCOL=<protocol> -e PROTOCOL_PARAM=<protocol_param> -e OBFS=<obfs> -e OBFS_PARAM=<obfs_param> -e LOCAL_PORT=<localport> -e LOCAL_ADDR=<localaddress> --restart=unless-stopped --name ssr-client sukeyisme/ssr-client
 ```
 
 ## gui
