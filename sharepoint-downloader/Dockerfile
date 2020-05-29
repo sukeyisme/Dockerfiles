@@ -7,6 +7,6 @@ RUN wget https://codeload.github.com/axzxc1236/SharepointDownloader/zip/master -
   && rm master.zip \
   && cd SharepointDownloader-master \
   && npm i 
-
+RUN ls /SharepointDownloader-master
 WORKDIR /SharepointDownloader-master
 ENTRYPOINT ["node","."]
