@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bash
+
+# copy config
+[[ ! -f /config/aria2.conf ]] && cp \
+	/defaults/aria2.conf /config/aria2.conf
+  
+[[ ! -f /config/aria2.conn.config ]] && cp \
+  /defaults/aria2.conn.config /config/aria2.conn.config
+  
+[[ ! -f /config/tasklist ]] && cp \
+  /defaults/tasklist /config/tasklist
