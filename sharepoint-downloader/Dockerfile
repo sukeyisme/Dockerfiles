@@ -1,6 +1,6 @@
-FROM node:alpine
+FROM lsiobase/alpine:3.12
 
-RUN apk add  --no-cache wget
+RUN apk add  --no-cache wget aria2 node
 
 RUN wget https://codeload.github.com/axzxc1236/SharepointDownloader/zip/master -O master.zip \
   && unzip master.zip \
@@ -10,4 +10,3 @@ RUN wget https://codeload.github.com/axzxc1236/SharepointDownloader/zip/master -
 
 WORKDIR /SharepointDownloader-master
 VOLUME /SharepointDownloader-master
-ENTRYPOINT ["node","./"]
