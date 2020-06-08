@@ -1,1 +1,3 @@
-node .
+#!/usr/bin/with-contenv bash
+
+/usr/bin/node .
