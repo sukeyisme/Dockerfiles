@@ -9,4 +9,4 @@ RUN wget https://codeload.github.com/axzxc1236/SharepointDownloader/zip/master -
   && npm i 
 
 WORKDIR /SharepointDownloader-master
-VOLUME /SharepointDownloader-master
+VOLUME /config
