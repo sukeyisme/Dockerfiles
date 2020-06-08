@@ -7,6 +7,9 @@ RUN wget https://codeload.github.com/axzxc1236/SharepointDownloader/zip/master -
   && rm master.zip \
   && cd SharepointDownloader-master \
   && npm i 
+  
+COPY root/ /
 
 WORKDIR /SharepointDownloader-master
-VOLUME /config
+
+VOLUME /config /download
