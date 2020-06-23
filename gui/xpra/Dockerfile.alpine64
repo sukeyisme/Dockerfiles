@@ -1,1 +1,52 @@
+FROM alpine:edge
 
+# last xpra 3.0.4 20191223
+RUN apk --no-cache upgrade \
+  && apk --no-cache add \
+  xpra \
+  py3-cairo \
+  py3-paramiko \
+  dbus-x11 \
+  xhost
+
+ENV DISPLAY=":14"
+ENV XPRA_TCP_PORT="10000"
+ENV GID="1000"
+ENV UID="1000"
+ENV UNAME="xpra"
+ENV GNAME="xpra"
+
+EXPOSE $XPRA_TCP_PORT
+
+RUN addgroup -g ${GID} ${GNAME}
+RUN adduser -D -g '' -u ${UID} -G ${GNAME} ${UNAME}
+
+# Xpra mmap
+RUN mkdir -p /tmp/xpra-mmap
+ENV XDG_RUNTIME_DIR=/tmp/xdg
+RUN mkdir -p "${XDG_RUNTIME_DIR}" "/run/user/${UID}/"
+RUN chown "${UID}":"${GID}" "${XDG_RUNTIME_DIR}" "/run/user/${UID}/"
+
+#may be try debian
+#https://gitlab.alpinelinux.org/alpine/aports/issues/8741
+#https://github.com/mviereck/x11docker/issues/117
+#https://stackoverflow.com/questions/3657860/bash-append-text-to-last-line-of-file
+RUN sed -i.bak 's#\(config \).*buildozer.*xorg\.conf#\1/etc/xpra/xorg.conf#g' /etc/xpra/conf.d/55_server_x11.conf \
+  && rm /etc/xpra/conf.d/55_server_x11.conf.bak
+
+RUN mkdir -p "/run/xpra"
+RUN chown "${UID}":"${GID}" "/run/xpra"
+
+ADD run /usr/local/bin/
+RUN chmod 777 /usr/local/bin/run
+
+ENV HOME=/home/${UNAME}
+ENV XPRA_DAEMON="no"
+
+RUN dbus-uuidgen > /var/lib/dbus/machine-id
+
+USER ${UNAME}
+WORKDIR ${HOME}
+
+ENTRYPOINT [ "/usr/local/bin/run" ]
+CMD [ "xhost +" ]
