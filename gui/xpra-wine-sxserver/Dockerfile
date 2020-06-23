@@ -10,4 +10,4 @@ USER root
 RUN ln -sf "${HOME}/.wine/drive_c/switch_games" /switch_games
 
 USER ${UNAME}
-CMD [ "wine start /unix \"\/home\/xpra\/sxserver.exe\""]
+CMD [ "wine64 start /unix \"\/home\/xpra\/sxserver.exe\""]
