@@ -1,4 +1,4 @@
-FROM sukeyisme/xpra-wine
+FROM sukeyisme/xpra-wine:x64
 
 ENV SXSERVER_VERSION 1.21
 
