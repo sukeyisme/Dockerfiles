@@ -9,5 +9,5 @@ RUN wget "https://sx.xecuter.com/download/sxserver_v${SXSERVER_VERSION}.zip" -O 
 USER root
 RUN ln -sf "${HOME}/.wine/drive_c/switch_games" /switch_games
 
-USER ${UNAME}
+# USER ${UNAME}
 CMD [ "wine64 start /unix \"\/home\/xpra\/sxserver.exe\""]
