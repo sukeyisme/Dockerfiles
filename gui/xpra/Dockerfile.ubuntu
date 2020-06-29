@@ -1,0 +1,23 @@
+FROM lsiobase/ubuntu:bionic
+
+# install xpra
+
+RUN \
+  echo "***** install xpra *****" && \
+  apt-get update && \
+  apt-get install -y \
+    xpra && \
+  echo "***** cleanup *****" && \
+  apt-get clean && \
+  rm -rf \
+    /tmp/* \
+    /var/lib/apt/lists/* \
+    /var/tmp/*
+
+# add local files
+COPY root/ /
+
+# ports 
+EXPOSE 10000
+
+RUN apt-get update && apt-get install -y xterm
