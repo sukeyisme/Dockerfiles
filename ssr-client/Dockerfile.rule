@@ -1,7 +1,7 @@
 FROM lsiobase/alpine:3.10
 
 RUN  echo "**** install runtime packages ****" \
-&& apk add --no-cache --update python libsodium privoxy curl\
+&& apk add --no-cache --update python libsodium privoxy curl perl\
 && echo "**** clean up ****" && \
  rm -rf \
 	/root/.cache \
