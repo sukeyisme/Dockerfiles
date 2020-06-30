@@ -1,0 +1,14 @@
+FROM lsiobase/alpine:3.10
+
+RUN  echo "**** install runtime packages ****" \
+&& apk add --no-cache --update python libsodium privoxy \
+&& echo "**** clean up ****" && \
+ rm -rf \
+	/root/.cache \
+	/tmp/*
+
+ADD shadowsocksr/shadowsocks /shadowsocks
+
+COPY root/ /
+
+VOLUME /config

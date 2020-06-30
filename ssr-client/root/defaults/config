@@ -1,0 +1,19 @@
+forward-socks5 / 127.0.0.1:4412 .
+listen-address 0.0.0.0:4411
+logdir /var/log/privoxy
+logfile privoxy.log
+debug 1
+debug 2
+#debug 4
+#debug 8
+#debug 16
+#debug 32
+#debug 64
+#debug 128
+#debug 256
+#debug 512
+#debug 1024
+#debug 2048
+#debug 4096
+debug 8192
+#debug 32768

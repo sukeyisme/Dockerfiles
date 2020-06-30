@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+
+# copy config
+[[ ! -f /config/config ]] && cp \
+	/defaults/config /config/config
+  
+[[ ! -f /config/config.json ]] && cp \
+	/defaults/config.json /config/config.json

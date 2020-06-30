@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+
+curl -4sSkLO https://raw.github.com/zfl9/gfwlist2privoxy/master/gfwlist2privoxy \
+&& bash gfwlist2privoxy 127.0.0.1:4412 \
+&& mv -f gfwlist.action /etc/privoxy/ \
+&& echo 'actionsfile gfwlist.action' >>/config/config
