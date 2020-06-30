@@ -1,3 +1,2 @@
 #!/usr/bin/with-contenv bash
-
-/usr/bin/python /shadowsocks/local.py -c /config/config.json
+python /shadowsocks/local.py -c /config/config.json

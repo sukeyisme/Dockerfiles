@@ -1,3 +1,2 @@
 #!/usr/bin/with-contenv bash
-
-/usr/sbin/privoxy /config/config
+privoxy /config/config
