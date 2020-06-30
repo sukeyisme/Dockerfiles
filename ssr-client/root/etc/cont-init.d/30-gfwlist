@@ -7,5 +7,5 @@ grep "gfwlist.action" /config/config > /dev/null
 if [ $? -eq 0 ]; then
   echo "founded!"
 else
-  echo 'actionsfile gfwlist.action' >> /config/config
+  echo '/etc/privoxy/actionsfile gfwlist.action' >> /config/config
 fi
