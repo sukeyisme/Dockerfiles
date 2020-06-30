@@ -1,4 +1,4 @@
 #!/usr/bin/with-contenv bash
 # s6-svwait -t 10000 -u /var/run/s6/services/ssr
-sleep 10000
+sleep 10
 privoxy /config/config
