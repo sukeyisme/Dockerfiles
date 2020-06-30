@@ -1,11 +1,11 @@
 #!/usr/bin/with-contenv bash
 
-curl -4sSkLO https://raw.github.com/zfl9/gfwlist2privoxy/master/gfwlist2privoxy \
-&& bash gfwlist2privoxy 127.0.0.1:4412 \
-&& mv -f gfwlist.action /etc/privoxy/ \
-grep "actionsfile gfwlist.action" /config/config >/dev/null 
-if [ $? -eq 0 ]; then
-    echo "Founded!"
+curl -4sSkLO https://raw.github.com/zfl9/gfwlist2privoxy/master/gfwlist2privoxy 
+bash gfwlist2privoxy 127.0.0.1:4412 \
+mv -f gfwlist.action /etc/privoxy/ 
+grep "gfwlist.action" /config/config > /dev/null
+if [ $? -eq 0 ]; then
+  echo "founded!"
 else
-    echo 'actionsfile gfwlist.action' >>/config/config
+  echo 'actionsfile gfwlist.action' >> /config/config
 fi
