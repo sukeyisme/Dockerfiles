@@ -1,0 +1,52 @@
+FROM centos:6.7
+
+RUN yum install -y wget tar
+RUN yum install -y bzip2
+RUN wget http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-5.4.0/gcc-5.4.0.tar.gz\
+&& tar xvf gcc-5.4.0.tar.gz
+RUN rpm --rebuilddb && yum groupinstall -y 'Development Tools'
+RUN cd gcc-5.4.0\
+&& ./contrib/download_prerequisites
+
+RUN cd ..\
+&& mkdir gcc-build-5.4.0\
+&& cd gcc-build-5.4.0\
+&& ../gcc-5.4.0/configure --enable-checking=release --enable-languages=c,c++ --disable-multilib \
+&& make -j4\
+&& make install \
+&& gcc -v
+
+RUN rpm --rebuilddb && yum install -y curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
+
+RUN yum remove git -y
+
+RUN wget https://www.kernel.org/pub/software/scm/git/git-2.19.1.tar.gz
+RUN tar xzf git-2.19.1.tar.gz
+RUN cd  git-2.19.1\
+&&make prefix=/usr/local/git all\
+&&make prefix=/usr/local/git install
+ENV PATH /usr/local/git/bin:$PATH
+
+# install scons
+RUN wget http://prdownloads.sourceforge.net/scons/scons-2.5.0.tar.gz\
+&& tar zxvf scons-2.5.0.tar.gz\
+&& cd scons-2.5.0/\
+&& python setup.py install\
+&& scons -v
+
+RUN rpm --rebuilddb &&yum update -y nss curl libcurl
+# install tom
+RUN git clone https://github.com/uiri/toml.git\
+&& cd toml\
+&& python setup.py install
+
+RUN cp /usr/local/lib64/libstdc++.so.6.0.21 /usr/lib64/
+RUN cd /usr/lib64 && rm -f libstdc++.so.6 && ln -s libstdc++.so.6.0.21 libstdc++.so.6
+
+RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.2.0/protobuf-cpp-3.2.0.tar.gz\
+&& tar zxvf protobuf-cpp-3.2.0.tar.gz\
+&& cd protobuf-3.2.0/\
+&& ./autogen.sh\
+&& ./configure\
+&& make\
+&& make install
