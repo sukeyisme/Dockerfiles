@@ -1,0 +1,18 @@
+#!/usr/bin/with-contenv bash
+
+TMPDIR=/tmp/xpra-mmap xpra start :14\
+  --tcp-auth=env\
+  --bind-tcp=0.0.0.0:10000\
+  --compress=0\
+  --html=on\
+  --keyboard-sync=yes\
+  --mmap=yes\
+  --printing=no\
+  --pulseaudio=no\
+  --readonly=no\
+  --daemon=no\
+  --sharing=no\
+  --speaker=no\
+  --webcam=no \
+  --xvfb="Xvfb -dpi 96 -noreset -nolisten tcp +extension GLX +extension RANDR +extension RENDER +extension Composite -screen 0 1600x900x24+32" \
+  --start="/opt/baidunetdisk/baidunetdisk >> /var/log/baidunetdisk.log 2>&1"
