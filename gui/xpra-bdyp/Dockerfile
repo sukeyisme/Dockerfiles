@@ -4,7 +4,7 @@ RUN last_version=$(curl -s "http://pan.baidu.com/disk/cmsdata?do=client"|grep -i
     curl ${last_version} -o /tmp/baidunetdisk_linux.deb && \
     apt-get update && \
     apt-get install -y desktop-file-utils \
-    libxss && \
+    libxss1 && \
     dpkg -i /tmp/baidunetdisk_linux.deb && \
     echo "***** cleanup *****" && \
     rm /tmp/baidunetdisk_linux.deb && \
