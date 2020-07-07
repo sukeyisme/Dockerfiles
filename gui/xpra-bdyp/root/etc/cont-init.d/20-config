@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+
+ln -s /root/baidunetdisk /config
+ln -s /root/baidunetdiskdownload /downloads
