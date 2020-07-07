@@ -1,4 +1,6 @@
 # Dockerfiles
+##Tip
+1. Replace the content in <> or {} with yours.
 
 ## n2n
 n2n has three version: ntop-stable,ntop-nightly,meyerd-v2s.
@@ -26,15 +28,21 @@ docker run -d --net=host -e SERVER_ADDR=<server_addr> -e SERVER_PORT=<remoteport
 ## gui
 ### xpra
 ```shell
-docker run -d --name xpra -p host_port:container_port -e XPRA_PASSWORD= sukeyisme/xpra
+docker run -d --name xpra -p {host_port}:{container_port} -e XPRA_PASSWORD= sukeyisme/xpra
 ```
+
+### xpra-bdyp
+```
+docker run -d --name xpra-bdyp -p 10000:10000 -v {host_folder}:/downloads -v {host_folder}:/config sukeyisme/xpra-bdyp
+```
+Then open url -> {your_ip}:10000 on your browser,login your baidunetdisk.
 
 ### xpra-wine
 ```shell
-docker run -d --name xpra-wine -p host_port:container_port  -e XPRA_PASSWORD= sukeyisme/xpra-wine
+docker run -d --name xpra-wine -p {host_port}:{container_port}  -e XPRA_PASSWORD= sukeyisme/xpra-wine
 ```
 
 ### xpra-wine-idm
 ```shell
-docker run -d --name xpra-wine-idm -p host_port:container_port  -e XPRA_PASSWORD= -v host_folder:/mnt/Downloads -v host_forder:/mnt/IDM -v host_forder:/mnt/DMCache sukeyisme/xpra-wine-idm
+docker run -d --name xpra-wine-idm -p {host_port}:{container_port}  -e XPRA_PASSWORD={your_password} -v {host_folder}:/mnt/Downloads -v {host_forder}:/mnt/IDM -v {host_forder}:/mnt/DMCache sukeyisme/xpra-wine-idm
 ```
