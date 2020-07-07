@@ -1,7 +1,6 @@
 #!/usr/bin/with-contenv bash
 
 TMPDIR=/tmp/xpra-mmap xpra start :14\
-  --tcp-auth=fail\
   --bind-tcp=0.0.0.0:10000\
   --compress=0\
   --html=on\
