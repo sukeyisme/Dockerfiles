@@ -1,5 +1,8 @@
 FROM lsiobase/ubuntu:bionic
 
+# keybord layout
+ENV DEBIAN_FRONTEND noninteractive
+
 # install xpra
 RUN \
   echo "***** install xpra *****" && \
