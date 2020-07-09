@@ -6,3 +6,8 @@
   
 [[ ! -f /config/config.json ]] && cp \
 	/defaults/config.json /config/config.json
+
+[[ ! -f /config/user-proxy.action ]] && cp \
+	/defaults/user-proxy.action /config/user-proxy.action
+
+ln -s /config/user-proxy.action /etc/privoxy/user-proxy.action
