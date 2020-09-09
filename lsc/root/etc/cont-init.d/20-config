@@ -3,3 +3,6 @@
 # copy config
 [[ ! -f /config/lsc.xml ]] && cp \
 	/defaults/lsc.xml /config/lsc.xml
+
+[[ ! -f /config/logback.xml ]] && cp \
+    /defaults/logback.xml /config/logback.xml
