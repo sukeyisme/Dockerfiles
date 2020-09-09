@@ -6,7 +6,7 @@ RUN \
  echo "**** download lsc tarball****" &&\
  wget https://lsc-project.org/archives/lsc-core-${VERSION}-dist.tar.gz &&\
  tar zxvf lsc-core-${VERSION}-dist.tar.gz && \
- mv lsc-${VERSION} /app &&\
+ mv lsc-${VERSION}/* /app &&\
  echo "**** clean up ****" &&\
  rm lsc-core-${VERSION}-dist.tar.gz
 
