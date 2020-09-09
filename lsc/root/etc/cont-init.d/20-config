@@ -1,19 +1,5 @@
 #!/usr/bin/with-contenv bash
 
 # copy config
-[[ ! -f /config/blacklist.txt ]] && cp \
-	/defaults/blacklist.txt /config/blacklist.txt
-  
-[[ ! -f /config/nut.conf ]] && cp \
-  /defaults/nut.default.conf /config/nut.conf
-  
-[[ ! -f /config/retailOnly.blacklist ]] && cp \
-  /defaults/retailOnly.blacklist /config/retailOnly.blacklist
-
-
-[[ ! -f /config/users.conf ]] && cp \
-  /defaults/users.conf /config/users.conf
-
-
-[[ ! -f /config/whitelist.txt ]] && cp \
-  /defaults/whitelist.txt /config/whitelist.txt
+[[ ! -f /config/lsc.xml ]] && cp \
+	/defaults/lsc.xml /config/lsc.xml

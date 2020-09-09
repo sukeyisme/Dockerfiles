@@ -1,2 +1,2 @@
 #!/usr/bin/with-contenv bash
-/usr/bin/python3 /app/nut.py -S
+/app/bin/lsc -f /config -a all -n
