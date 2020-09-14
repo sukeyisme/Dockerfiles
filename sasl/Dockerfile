@@ -58,4 +58,4 @@ RUN set -x \
 
 COPY root/ /
 
-VOLUME /config
+VOLUME /config /var/run/saslauthd
