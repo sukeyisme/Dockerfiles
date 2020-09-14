@@ -1,0 +1,2 @@
+#!/usr/bin/with-contenv bash
+/usr/sbin/saslauthd -a ldap -d 1

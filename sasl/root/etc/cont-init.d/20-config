@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bash
+
+# copy config
+[[ ! -f /config/saslauthd.conf ]] &&cp \
+	/defaults/saslauthd.conf /config/saslauthd.conf
+
+# [[ ! -f /config/saslauthd ]] &&cp \
+# 	/defaults/saslauthd /config/saslauthd
+
+ln -s /config/saslauthd.conf /etc/saslauthd.conf
+# ln -s /config/saslauthd /etc/default/saslauthd
