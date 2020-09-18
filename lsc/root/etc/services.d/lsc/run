@@ -1,2 +1,2 @@
 #!/usr/bin/with-contenv bash
-/app/bin/lsc -f /config -a all -c all
+/app/bin/lsc -f /config -s all -c all
