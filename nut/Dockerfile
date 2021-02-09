@@ -1,7 +1,7 @@
 # FROM python:alpine AS build-env
 FROM sukeyisme/python3 As build-env
 
-RUN apk add --no-cache --update gcc musl-dev libffi-dev openssl-dev python3-dev jpeg-dev git
+RUN apk add --no-cache --update gcc musl-dev libffi-dev openssl-dev python3-dev jpeg-dev git libusb py3-qt5
 
 RUN python3 -m pip install -U pip
 
