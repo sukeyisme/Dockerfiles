@@ -16,6 +16,7 @@ RUN echo "**** set version tag ****" && \
     fi && \
     echo '**** Downloading nut version ****' ${NUT_RELEASE} && \
     curl -sSL -o /app/nut.tar.gz https://github.com/blawar/nut/archive/${NUT_RELEASE}.tar.gz && \
+    mkdir -p /app/nut && \
     tar xf /app/nut.tar.gz -C \
 	"/app/nut" --strip-components=1 && \
     pip install --prefix="/install" -r /app/nut/requirements.txt
