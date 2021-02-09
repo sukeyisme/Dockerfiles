@@ -1,2 +1,2 @@
 #!/usr/bin/with-contenv bash
-/usr/bin/python3 /config/www/nut/nut.py -S
+/usr/bin/python3 /app/nut/nut.py -S

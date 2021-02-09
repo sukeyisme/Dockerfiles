@@ -7,16 +7,8 @@ RUN python3 -m pip install -U pip
 
 # RUN apk add --no-cache py3-qt5
 
-RUN pip install --prefix="/install" colorama pyopenssl requests unidecode Pillow urllib3 Flask pyusb google-auth-oauthlib bs4 zstandard
-
-
-
-FROM sukeyisme/python3
+#RUN pip install --prefix="/install" colorama pyopenssl requests unidecode Pillow urllib3 Flask pyusb google-auth-oauthlib bs4 zstandard
 ARG NUT_RELEASE
-ENV NUT_PATH="/config/www/nut"
-COPY --from=build-env /install /usr
-RUN apk add --no-cache  py3-tqdm  py3-beautifulsoup4 py3-google-api-python-client  py3-qt5
-
 RUN echo "**** set version tag ****" && \
     if [ -z ${NUT_RELEASE+x} ]; then \
            NUT_RELEASE=$(curl -s https://api.github.com/repos/blawar/nut/releases/latest \
@@ -24,8 +16,16 @@ RUN echo "**** set version tag ****" && \
     fi && \
     echo '**** Downloading nut version ****' ${NUT_RELEASE} && \
     curl -sSL -o /app/nut.tar.gz https://github.com/blawar/nut/archive/${NUT_RELEASE}.tar.gz && \
-    echo '**** cleanup ****' && \
-    rm -rf /var/cache/apk/*
+    tar xf /app/nut.tar.gz -C \
+	"/app/nut" --strip-components=1 && \
+    pip install --prefix="/install" -r /app/nut/requirements.txt
+
+
+
+FROM sukeyisme/python3
+COPY --from=build-env /install /usr
+COPY --from=build-env /app/nut/* /app/nut
+RUN apk add --no-cache  py3-tqdm  py3-beautifulsoup4 py3-google-api-python-client  py3-qt5
 
 COPY root/ /
 
