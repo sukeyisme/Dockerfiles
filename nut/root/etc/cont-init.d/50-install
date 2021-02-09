@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bash
+
+# create folders
+mkdir -p \
+    "${NUT_PATH}"
+
+# install app
+if [ ! -e "${NUT_PATH}/nut.py" ]; then
+	tar xf /app/nut.tar.gz -C \
+		"${NUT_PATH}" --strip-components=1
+fi
