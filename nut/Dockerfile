@@ -7,7 +7,7 @@ RUN python3 -m pip install -U pip
 
 # RUN apk add --no-cache py3-qt5
 
-RUN pip install --prefix="/install" colorama pyopenssl requests unidecode Pillow urllib3 Flask pyusb google-auth-oauthlib bs4
+RUN pip install --prefix="/install" colorama pyopenssl requests unidecode Pillow urllib3 Flask pyusb google-auth-oauthlib bs4 zstandard
 
 
 
