@@ -31,7 +31,7 @@ RUN echo "**** set version tag ****" && \
     curl -sSL -o /app/nut.tar.gz https://github.com/blawar/nut/archive/${NUT_RELEASE}.tar.gz && \
     mkdir -p /app/nut && \
     tar xf /app/nut.tar.gz -C \
-	"/app/nut" --strip-components=1
+	"/app/nut"
 
 
 
