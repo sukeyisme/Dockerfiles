@@ -37,7 +37,7 @@ RUN echo "**** set version tag ****" && \
 
 FROM sukeyisme/python3
 COPY --from=build-env /install /usr
-COPY --from=build-env /app/nut/* /app/nut
+COPY --from=build-env /app/nut/* /app/nut/
 RUN apk add --no-cache  py3-tqdm  py3-beautifulsoup4 py3-google-api-python-client  py3-qt5
 
 COPY root/ /
