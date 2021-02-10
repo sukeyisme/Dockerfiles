@@ -7,7 +7,20 @@ RUN python3 -m pip install -U pip
 
 # RUN apk add --no-cache py3-qt5
 
-#RUN pip install --prefix="/install" colorama pyopenssl requests unidecode Pillow urllib3 Flask pyusb google-auth-oauthlib bs4 zstandard
+RUN pip install --prefix="/install" colorama \
+pyopenssl \
+requests \
+unidecode \
+Pillow \
+urllib3 \
+Flask \
+pyusb \
+google-auth-oauthlib \
+bs4 \
+zstandard \
+pycryptodome \
+pycryptoplus
+
 ARG NUT_RELEASE
 RUN echo "**** set version tag ****" && \
     if [ -z ${NUT_RELEASE+x} ]; then \
@@ -18,8 +31,7 @@ RUN echo "**** set version tag ****" && \
     curl -sSL -o /app/nut.tar.gz https://github.com/blawar/nut/archive/${NUT_RELEASE}.tar.gz && \
     mkdir -p /app/nut && \
     tar xf /app/nut.tar.gz -C \
-	"/app/nut" --strip-components=1 && \
-    pip install --prefix="/install" -r /app/nut/requirements.txt
+	"/app/nut" --strip-components=1
 
 
 
