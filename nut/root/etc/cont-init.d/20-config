@@ -7,9 +7,7 @@
 [[ ! -f /config/users.conf ]] && cp \
   /defaults/users.conf /config/users.conf
 
-[[ -f /app/nut/conf/nut.conf]] && \
-  rm /app/nut/conf/nut.conf && \
+[[ -f /app/nut/conf/nut.conf]] && rm /app/nut/conf/nut.conf
 ln -s /config/nut.conf /app/nut/conf/nut.conf
-[[ -f /app/nut/conf/users.conf]] && \
-  rm /app/nut/conf/users.conf && \
+[[ -f /app/nut/conf/users.conf]] && rm /app/nut/conf/users.conf
 ln -s /config/users.conf /app/nut/conf/users.conf
