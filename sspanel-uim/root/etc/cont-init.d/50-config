@@ -8,5 +8,7 @@
 	/defaults/appprofile.example.php /config/appprofile.php
 
 mkdir -p ${SSPANEL_UIM_PATH}/config
+[[ -f ${SSPANEL_UIM_PATH}/config/.config.php ]] && rm  ${SSPANEL_UIM_PATH}/config/.config.php
 ln -s /config/.config.php ${SSPANEL_UIM_PATH}/config/.config.php
+[[ -f ${SSPANEL_UIM_PATH}/config/approfile.php ]] && rm  ${SSPANEL_UIM_PATH}/config/appprofile.php
 ln -s /config/appprofile.php ${SSPANEL_UIM_PATH}/config/appprofile.php
