@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+
+# copy config
+[[ ! -f /config/.config.php ]] && cp \
+	/defaults/.config.example.php /config/.config.php
+
+[[ ! -f /config/appprofile.php ]] && cp \
+	/defaults/appprofile.example.php /config/appprofile.php
+
+mkdir -p ${SSPANEL_UIM_PATH}/config
+ln -s /config/.config.php ${SSPANEL_UIM_PATH}/config/.config.php
+ln -s /config/appprofile.php ${SSPANEL_UIM_PATH}/config/appprofile.php
