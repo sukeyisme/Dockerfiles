@@ -10,7 +10,9 @@ ENV SSPANEL_UIM_PATH="/app/sspanel-uim"
 RUN apk add --no-cache tar
 
 
-RUN echo "**** set version tag ****" && \
+RUN apk add --no-cache tar &&\
+    apk add --no-cache --repository http://mirrors.aliyun.com/alpine/edge/community gnu-libiconv &&\
+    echo "**** set version tag ****" && \
     if [ -z ${SSPANEL_UIM_RELEASE+x} ]; then \
            SSPANEL_UIM_RELEASE=$(curl -s https://api.github.com/repos/sukeyisme/sspanel-uim/releases/latest \
            | awk -F\" '/tag_name/ {print $4;exit}'); \
@@ -39,6 +41,8 @@ RUN echo "**** set version tag ****" && \
     rm /app/sspanel-uim.tar.gz && \
     rm -rf ${SSPANEL_UIM_PATH}/config &&\
     rm -rf /var/cache/apk/*
+
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 COPY root/ /
 
