@@ -9,6 +9,10 @@
 [[ ! -f /config/appprofile.php ]] && cp \
 	/defaults/appprofile.example.php /config/appprofile.php
 
+echo ${ADMIN_NAME}
+echo ${ADMIN_PASSWORD}
+echo ${ADMIN}
+
 # create admin if admin name not exsit
 php xcat User createAdmin << EOF
 ${ADMIN_NAME}
