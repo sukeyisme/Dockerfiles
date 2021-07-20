@@ -31,8 +31,6 @@ RUN apk add --no-cache tar \
     curl -SL https://getcomposer.org/installer -o composer-setup.php &&\
     php composer-setup.php && \
     php composer.phar install && \
-    php xcat Tool initQQWry && \
-    php xcat ClientDownload && \
     echo '**** Set cron job ****' && \
     crontab -l | { cat; echo "30 22 * * * php ${SSPANEL_UIM_PATH}/xcat sendDiaryMail"; } | crontab - && \
     crontab -l | { cat; echo "0 0 * * * php ${SSPANEL_UIM_PATH}/xcat Job DailyJob"; } | crontab - && \
@@ -48,4 +46,4 @@ WORKDIR ${SSPANEL_UIM_PATH}
 
 EXPOSE 80
 
-VOLUME /config 
+VOLUME /config ${SSPANEL_UIM_PATH}/public/clients

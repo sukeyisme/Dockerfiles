@@ -12,3 +12,14 @@ mkdir -p ${SSPANEL_UIM_PATH}/config
 ln -s /config/.config.php ${SSPANEL_UIM_PATH}/config/.config.php
 [[ -f ${SSPANEL_UIM_PATH}/config/appprofile.php ]] && rm  ${SSPANEL_UIM_PATH}/config/appprofile.php
 ln -s /config/appprofile.php ${SSPANEL_UIM_PATH}/config/appprofile.php
+
+[[ -f ${SSPANEL_UIM_PATH}/config/.config.php ]] && \
+php xcat User createAdmin << EOF
+${ADMIN}
+${ADMIN_PASSWORD}
+EOF
+
+# download ip db
+php xcat Tool initQQWry
+# download all proxy clients
+php xcat ClientDownload
