@@ -7,17 +7,26 @@ FROM linuxserver/nginx
 ARG SSPANEL_UIM_RELEASE
 ENV SSPANEL_UIM_PATH="/app/sspanel-uim"
 
-RUN apk add --no-cache tar
+ENV LANG=en_US.UTF-8 \
+LANGUAGE=en_US.UTF-8
 
-
-RUN apk add --no-cache tar &&\
-    apk add --no-cache --repository http://mirrors.aliyun.com/alpine/edge/community gnu-libiconv &&\
-    echo "**** set version tag ****" && \
-    if [ -z ${SSPANEL_UIM_RELEASE+x} ]; then \
+RUN apk add --no-cache tar ca-certificates \
+    && echo "**** set language ****" \
+    && wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \ 
+    && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-2.29-r0.apk \ 
+    && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-bin-2.29-r0.apk \
+    && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.29-r0/glibc-i18n-2.29-r0.apk \
+    && apk add glibc-2.29-r0.apk glibc-bin-2.29-r0.apk glibc-i18n-2.29-r0.apk \
+    && rm -rf /usr/lib/jvm glibc-2.29-r0.apk glibc-bin-2.29-r0.apk  glibc-i18n-2.29-r0.apk \
+    && /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 "$LANG" || true \
+    && echo "export LANG=$LANG" > /etc/profile.d/locale.sh \
+    && apk del glibc-i18n \
+    && echo "**** set version tag ****" \
+    && if [ -z ${SSPANEL_UIM_RELEASE+x} ]; then \
            SSPANEL_UIM_RELEASE=$(curl -s https://api.github.com/repos/sukeyisme/sspanel-uim/releases/latest \
            | awk -F\" '/tag_name/ {print $4;exit}'); \
-    fi && \
-    echo '**** Downloading sspanel-uim version ****' ${SSPANEL_UIM_RELEASE} && \
+    fi \
+    && echo '**** Downloading sspanel-uim version ****' ${SSPANEL_UIM_RELEASE} && \
     curl -sSL -o /app/sspanel-uim.tar.gz https://github.com/sukeyisme/sspanel-uim/archive/${SSPANEL_UIM_RELEASE}.tar.gz && \
     echo '**** Setup ssrpanel ****' && \
     mkdir -p "${SSPANEL_UIM_PATH}" && \
@@ -41,8 +50,6 @@ RUN apk add --no-cache tar &&\
     rm /app/sspanel-uim.tar.gz && \
     rm -rf ${SSPANEL_UIM_PATH}/config &&\
     rm -rf /var/cache/apk/*
-
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 COPY root/ /
 
