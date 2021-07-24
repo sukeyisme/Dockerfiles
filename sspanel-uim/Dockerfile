@@ -38,6 +38,7 @@ RUN apk add --no-cache tar \
     echo '**** cleanup ****' && \
     rm /app/sspanel-uim.tar.gz && \
     rm -rf ${SSPANEL_UIM_PATH}/config &&\
+    mkdir -p ${SSPANEL_UIM_PATH}/config &&\
     rm -rf /var/cache/apk/*
 
 COPY root/ /
