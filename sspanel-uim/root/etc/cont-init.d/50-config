@@ -19,6 +19,7 @@ php xcat User createAdmin << EOF
 ${ADMIN_NAME}
 ${ADMIN_PASSWORD}
 #{ADMIN}
+
 EOF
 
 # download ip db
