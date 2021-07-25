@@ -24,10 +24,6 @@ RUN apk add --no-cache tar \
     tar xf /app/sspanel-uim.tar.gz -C \
 		"${SSPANEL_UIM_PATH}" --strip-components=1 &&\
     cd ${SSPANEL_UIM_PATH} && \
-    cp config/.config.example.php config/.config.php && \
-    cp config/appprofile.example.php config/appprofile.php && \
-    chmod -R 755 ${SSPANEL_UIM_PATH}/storage &&\
-    chmod -R 777 ${SSPANEL_UIM_PATH}/storage/framework/smarty/compile/ &&\
     curl -SL https://getcomposer.org/installer -o composer-setup.php &&\
     php composer-setup.php && \
     php composer.phar install && \
@@ -37,7 +33,6 @@ RUN apk add --no-cache tar \
     crontab -l | { cat; echo "*/1 * * * * php ${SSPANEL_UIM_PATH}/xcat Job CheckJob"; } | crontab - && \
     echo '**** cleanup ****' && \
     rm /app/sspanel-uim.tar.gz && \
-    rm -rf ${SSPANEL_UIM_PATH}/config &&\
     rm -rf /var/cache/apk/*
 
 COPY root/ /
@@ -46,4 +41,4 @@ WORKDIR ${SSPANEL_UIM_PATH}
 
 EXPOSE 80
 
-VOLUME /config ${SSPANEL_UIM_PATH}/public/clients ${SSPANEL_UIM_PATH}/storage
+VOLUME /config /clients /storage

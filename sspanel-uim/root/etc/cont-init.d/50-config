@@ -10,6 +10,21 @@
 [[ -d ${SSPANEL_UIM_PATH}/config ]] && rm -rf ${SSPANEL_UIM_PATH}/config
 ln -s /config ${SSPANEL_UIM_PATH}/config
 
+[[ -d ${SSPANEL_UIM_PATH}/clients ]] && rm -rf ${SSPANEL_UIM_PATH}/clients
+ln -s /clients ${SSPANEL_UIM_PATH}/clients
+
+[[ ! -d /storage/framework ]] && cp -r \
+    /defaults/storage/framework /storage
+
+[[ ! -d /storage/SendTelegram ]] && cp -r \
+    /defaults/storage/SendTelegram /storage
+
+[[ -d ${SSPANEL_UIM_PATH}/storage ]] && rm -rf ${SSPANEL_UIM_PATH}/storage
+ln -s /storage ${SSPANEL_UIM_PATH}/storage
+chmod -R 755 ${SSPANEL_UIM_PATH}/storage
+chmod -R 777 ${SSPANEL_UIM_PATH}/storage/framework/smarty/compile/
+
+
 # create admin if admin name not exsit
 php xcat User createAdmin << EOF
 ${ADMIN_NAME}
