@@ -1,7 +1,5 @@
 #!/usr/bin/with-contenv bash
 
-
-
 # copy config
 [[ ! -f /config/.config.php ]] && cp \
 	/defaults/.config.example.php /config/.config.php
@@ -9,19 +7,17 @@
 [[ ! -f /config/appprofile.php ]] && cp \
 	/defaults/appprofile.example.php /config/appprofile.php
 
-[[ -f ${SSPANEL_UIM_PATH}/config/.config.php ]] && rm  ${SSPANEL_UIM_PATH}/config/.config.php
-ln -s /config/.config.php ${SSPANEL_UIM_PATH}/config/.config.php
-[[ -f ${SSPANEL_UIM_PATH}/config/appprofile.php ]] && rm  ${SSPANEL_UIM_PATH}/config/appprofile.php
-ln -s /config/appprofile.php ${SSPANEL_UIM_PATH}/config/appprofile.php
+[[ -d ${SSPANEL_UIM_PATH}/config ]] && rm -rf ${SSPANEL_UIM_PATH}/config
+ln -s /config ${SSPANEL_UIM_PATH}/config
 
 # create admin if admin name not exsit
 php xcat User createAdmin << EOF
 ${ADMIN_NAME}
 ${ADMIN_PASSWORD}
 y
-EOF
+EOF || echo "php xcat User createAdmin command error"
 
 # download ip db
 php xcat Tool initQQWry || echo "php xcat Tool initQQWry command error"
 # download all proxy clients
-php xcat ClientDownload || echo "php xcat ClientDownload command error"
+php xcat ClientDownload || echo "php xcat Cli command error"
