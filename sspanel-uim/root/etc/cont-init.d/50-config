@@ -15,7 +15,7 @@ php xcat User createAdmin << EOF
 ${ADMIN_NAME}
 ${ADMIN_PASSWORD}
 y
-EOF || echo "php xcat User createAdmin command error"
+EOF
 
 # download ip db
 php xcat Tool initQQWry || echo "php xcat Tool initQQWry command error"
