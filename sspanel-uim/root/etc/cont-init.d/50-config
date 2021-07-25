@@ -22,6 +22,6 @@ y
 EOF
 
 # download ip db
-php xcat Tool initQQWry
+php xcat Tool initQQWry || echo "php xcat Tool initQQWry command error"
 # download all proxy clients
-php xcat ClientDownload
+php xcat ClientDownload || echo "php xcat ClientDownload command error"
