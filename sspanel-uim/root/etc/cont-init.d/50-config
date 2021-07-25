@@ -18,8 +18,7 @@ ln -s /config/appprofile.php ${SSPANEL_UIM_PATH}/config/appprofile.php
 php xcat User createAdmin << EOF
 ${ADMIN_NAME}
 ${ADMIN_PASSWORD}
-#{ADMIN}
-
+y
 EOF
 
 # download ip db
