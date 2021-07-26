@@ -28,7 +28,7 @@ RUN apk add --no-cache tar \
     php composer-setup.php && \
     php composer.phar install && \
     echo '**** Set cron job ****' && \
-    crontab -l | { cat; echo "30 22 * * * php ${SSPANEL_UIM_PATH}/xcat sendDiaryMail"; } | crontab - && \
+    crontab -l | { cat; echo "30 22 * * * php ${SSPANEL_UIM_PATH}/xcat Job SendMail"; } | crontab - && \
     crontab -l | { cat; echo "0 0 * * * php ${SSPANEL_UIM_PATH}/xcat Job DailyJob"; } | crontab - && \
     crontab -l | { cat; echo "*/1 * * * * php ${SSPANEL_UIM_PATH}/xcat Job CheckJob"; } | crontab - && \
     echo '**** cleanup ****' && \
