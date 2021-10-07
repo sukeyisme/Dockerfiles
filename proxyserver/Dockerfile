@@ -1,4 +1,8 @@
-FROM linuxserver/nginx
+FROM sukeyisme/python3 as build
+
+
+
+FROM sukeyisme/python3
 
 ARG SSPANEL_UIM_RELEASE
 ENV SSPANEL_UIM_PATH="/app/sspanel-uim"
@@ -10,15 +14,15 @@ ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 RUN apk add --no-cache tar \
     && echo "**** set version tag ****" \
     && if [ -z ${SSPANEL_UIM_RELEASE+x} ]; then \
-    SSPANEL_UIM_RELEASE=$(curl -s https://api.github.com/repos/sukeyisme/sspanel-uim/releases/latest \
-    | awk -F\" '/tag_name/ {print $4;exit}'); \
+           SSPANEL_UIM_RELEASE=$(curl -s https://api.github.com/repos/sukeyisme/sspanel-uim/releases/latest \
+           | awk -F\" '/tag_name/ {print $4;exit}'); \
     fi \
     && echo '**** Downloading sspanel-uim version ****' ${SSPANEL_UIM_RELEASE} && \
     curl -sSL -o /app/sspanel-uim.tar.gz https://github.com/sukeyisme/sspanel-uim/archive/${SSPANEL_UIM_RELEASE}.tar.gz && \
     echo '**** Setup ssrpanel ****' && \
     mkdir -p "${SSPANEL_UIM_PATH}" && \
     tar xf /app/sspanel-uim.tar.gz -C \
-    "${SSPANEL_UIM_PATH}" --strip-components=1 &&\
+		"${SSPANEL_UIM_PATH}" --strip-components=1 &&\
     cd ${SSPANEL_UIM_PATH} && \
     curl -SL https://getcomposer.org/installer -o composer-setup.php &&\
     php composer-setup.php && \
@@ -27,7 +31,6 @@ RUN apk add --no-cache tar \
     crontab -l | { cat; echo "30 22 * * * php ${SSPANEL_UIM_PATH}/xcat Job SendMail"; } | crontab - && \
     crontab -l | { cat; echo "0 0 * * * php ${SSPANEL_UIM_PATH}/xcat Job DailyJob"; } | crontab - && \
     crontab -l | { cat; echo "*/1 * * * * php ${SSPANEL_UIM_PATH}/xcat Job CheckJob"; } | crontab - && \
-    crontab -l | { cat; echo "*/1 * * * * php ${SSPANEL_UIM_PATH}/xcat Job UserJob"; } | crontab - && \
     echo '**** cleanup ****' && \
     rm /app/sspanel-uim.tar.gz && \
     rm -rf /var/cache/apk/*
