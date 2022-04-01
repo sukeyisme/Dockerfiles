@@ -1,0 +1,13 @@
+FROM  lsiobase/alpine:3.13
+
+RUN apk add --no-cache \
+    libpcap \
+    libuv \
+    curl 
+
+ENV VERSION=0.2.3
+
+ADD https://github.com/spacemeowx2/switch-lan-play/releases/download/v$VERSION/lan-play-linux /usr/bin/lan-play-linux
+RUN  chmod +x /usr/bin/lan-play-linux
+
+COPY root/ /
